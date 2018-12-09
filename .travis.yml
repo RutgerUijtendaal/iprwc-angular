@@ -1,0 +1,18 @@
+language: java
+sudo: required
+services:
+- docker
+env:
+  global:
+  - IMAGE_NAME=ruijtendaal/iprwc-angular
+  - REGISTRY_USER=ruijtendaal
+  - secure: OigPNOcySx+IfEn7AybJ2qdtp7ThwImTRuKivm/aHqu6/rsiV7j4Hr9eL6VqH72Nmvb9bSetiJtnz2wNlMzl3M3zcnmMR+GFastgwQOWReM8yqdtSTEr1NWY77R047LBG/YLE5VMVUHp6HG328w/SQOL5fQpP6vYx+Lqtq2tm5uiRwtWXLHYDwaJZO9hlEEIwZAb3+dGUSMNtEapTmoftTf1mPyzPbPnbj9qA68iI2hRRWQEqIG8HKdgR+0C8ajWv4d2JTEjANgrb6p5MIrq272S1hjlwEqKTLz6uNMBJqC2HoaBRDKcMXfNuxBr+Gmtxuk2dMqaSZhE15GXqvitaCh07wmBXiZbeORj66Ru0o35ho05uovm9PF48xj0sCUNfG715clUYV33/bvBFMjhj+hWLYFl0Vl0CBXFgOAosYnFmm+ghmaLtjtpnwPSqOK4GfRAtfluvtIhZXixCtdJVUS8yw2dkyB0RnPiH8EPgO2zEtuJymh+BTnEU3J8H9hoTjl6Pza5zA84Vfg8MzUvRaAGlmvL6owosCFUoqPp121YmwWq+vf6pnPIas7aywRd/eq76JNXiVC89CeA5ET1lp3noKzBWDWX+K8MwWkFgD+ovqAkV97RVtm5xLXc673nBSs2k/SQNseTN5eV4DCyZgKHc4X93QfRDOkflGJ3FUY=
+script:
+- docker build --tag "$IMAGE_NAME:latest" .
+before_deploy:
+- echo $REGISTRY_PASS | docker login -u $REGISTRY_USER --password-stdin
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest"
+  on:
+    branch: master
