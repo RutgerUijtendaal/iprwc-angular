@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {CoreModule} from './core/core.module';
-import {SharedModule} from './shared/shared.module';
 import {ShopModule} from './shop/shop.module';
 import {AdminModule} from './admin/admin.module';
+import {SharedModule} from './shared/shared.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,10 +16,11 @@ import {AdminModule} from './admin/admin.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     CoreModule,
-    SharedModule,
     ShopModule,
-    AdminModule
+    AdminModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
