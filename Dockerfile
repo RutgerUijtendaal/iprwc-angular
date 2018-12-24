@@ -13,6 +13,8 @@ RUN npm run build
 # Stage 2
 FROM nginx:1.13.12-alpine
 
+RUN rm -rf /usr/share/nginx/html/*
+
 COPY --from=node /usr/src/app/dist/iprwc /usr/share/nginx/html
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
