@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ShopHomeComponent} from './shop/shop-home/shop-home.component';
-import {AdminHomeComponent} from './admin/admin-home/admin-home.component';
 
 const routes: Routes = [
-  {path: '', component: ShopHomeComponent},
-  {path: 'admin', component: AdminHomeComponent}
+  {path: 'admin', loadChildren: './modules/admin/admin.module#AdminModule'},
+  {path: 'shop', loadChildren: './modules/shop/shop.module#ShopModule'},
+  {path: 'user', loadChildren: './modules/user/user.module#UserModule'},
+  {path: '', loadChildren: './modules/user-auth/user-auth.module#UserAuthModule'},
+  {path: '', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
