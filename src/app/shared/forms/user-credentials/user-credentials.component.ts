@@ -8,6 +8,7 @@ import {FormGroup} from '@angular/forms';
 })
 export class UserCredentialsComponent implements OnInit {
   @Input() user: FormGroup;
+  hide: boolean;
 
   constructor() { }
 
