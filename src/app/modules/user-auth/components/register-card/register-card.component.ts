@@ -16,7 +16,7 @@ export class RegisterCardComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    this.initForm()
+    this.initForm();
   }
 
   register() {
@@ -27,7 +27,7 @@ export class RegisterCardComponent implements OnInit {
     this.store.dispatch(new AuthActions.TryRegister({
       email: email,
       password: password
-    }))
+    }));
   }
 
   private initForm() {

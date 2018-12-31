@@ -14,17 +14,30 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
 
   switch(action.type) {
     case (AuthActions.LOGIN):
-    case (AuthActions.REGISTER):
+      console.log('Login fired');
       return {
         ...state,
         authenticated: true
       };
+    case (AuthActions.REGISTER):
+      console.log('Register fired');
+      return {
+        ...state
+      };
     case (AuthActions.LOGOUT):
+      console.log('Logout fired');
       return {
         ...state,
         token: null,
         authenticated: false
-      }
+      };
+    case (AuthActions.SET_TOKEN):
+      console.log('SetToken fired');
+      console.log(action.payload);
+      return {
+        ...state,
+        token: action.payload
+      };
     default:
       return state;
   }

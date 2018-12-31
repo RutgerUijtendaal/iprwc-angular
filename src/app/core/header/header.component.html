@@ -10,7 +10,11 @@
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button *ngIf="(authState | async).authenticated" mat-menu-item routerLink="/login">
+        <button *ngIf="(authState | async).authenticated" mat-menu-item routerLink="/user">
+          <mat-icon>person</mat-icon>
+          <span>Account</span>
+        </button>
+        <button *ngIf="(authState | async).authenticated" mat-menu-item routerLink="/" (click)="logout()">
           <mat-icon>person</mat-icon>
           <span>Log Out</span>
         </button>

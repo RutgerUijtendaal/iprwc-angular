@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
 export const TRY_REGISTER = 'TRY_REGISTER';
-
-export const LOGIN = 'LOGIN';
 export const REGISTER = 'REGISTER';
+export const TRY_LOGIN = 'TRY_LOGIN';
+export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
 
@@ -13,12 +13,18 @@ export class TryRegister implements Action {
   constructor(public payload: {email: string, password: string}) {}
 }
 
-export class Login implements Action {
-  readonly type = LOGIN;
-}
-
 export class Register implements Action {
   readonly type = REGISTER;
+}
+
+export class TryLogin implements Action {
+  readonly type = TRY_LOGIN;
+
+  constructor(public payload: {email: string, password: string}) {}
+}
+
+export class Login implements Action {
+  readonly type = LOGIN;
 }
 
 export class Logout implements Action {
@@ -33,4 +39,4 @@ export class SetToken implements Action {
   }
 }
 
-export type AuthActions = TryRegister | Login | Register | Logout | SetToken;
+export type AuthActions = TryRegister | Register | TryLogin | Login | Logout | SetToken;

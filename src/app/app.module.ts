@@ -13,6 +13,7 @@ import { CoreModule } from '@core/core.module';
 import { reducers } from '@core/store/app.reducer';
 
 import { AuthEffects } from '@modules/user-auth/store/auth.effects';
+import {UserAuthGuard} from '@modules/user-auth/user-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { AuthEffects } from '@modules/user-auth/store/auth.effects';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([ AuthEffects ])
   ],
-  providers: [],
+  providers: [UserAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
