@@ -2,23 +2,25 @@
   <mat-card-header class="login-card-header">
     <mat-card-title>Login</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <app-user-credentials
-      [user]="loginForm"
-    >
-    </app-user-credentials>
-  </mat-card-content>
-  <mat-card-actions>
-    <div class="button-row">
-      <button mat-button color="primary" routerLink="/register">Create Account</button>
-      <span class="spacer"></span>
-      <button
-        mat-raised-button
-        [disabled]="!loginForm.valid"
-        (click)="login()"
-        color="primary">
-        Login
-      </button>
-    </div>
-  </mat-card-actions>
+  <form action="" (ngSubmit)="login()">
+    <mat-card-content>
+      <app-user-credentials
+        [user]="loginForm"
+      >
+      </app-user-credentials>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="button-row">
+        <button type="button" mat-button color="primary" routerLink="/register">Create Account</button>
+        <span class="spacer"></span>
+        <button
+          mat-raised-button
+          [disabled]="!loginForm.valid"
+          type="submit"
+          color="primary">
+          Login
+        </button>
+      </div>
+    </mat-card-actions>
+  </form>
 </mat-card>

@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import { map } from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 
 import * as fromApp from '@core/store/app.reducer';
@@ -13,11 +13,12 @@ export class UserAuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.store.select('auth').pipe(
+      take(1),
       map((authState: fromAuth.State) => {
         if (authState.authenticated) {
           return true;
         } else {
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
           return false;
         }
       })

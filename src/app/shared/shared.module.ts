@@ -5,18 +5,20 @@ import { MaterialModule } from '../material/material.module';
 import { UserCredentialsComponent } from './forms/user-credentials/user-credentials.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     DropdownDirective,
-    UserCredentialsComponent
+    UserCredentialsComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ],
   exports: [
     DropdownDirective,
@@ -24,7 +26,8 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ]
 })
 export class SharedModule { }

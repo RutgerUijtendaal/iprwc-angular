@@ -1,0 +1,6 @@
+<div fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutAlign="center" fxLayoutGap="15px">
+    <app-product-card
+      *ngFor="let productEl of (shopState | async).products"
+      [product]="productEl">
+    </app-product-card>
+</div>

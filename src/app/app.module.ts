@@ -14,6 +14,9 @@ import { reducers } from '@core/store/app.reducer';
 
 import { AuthEffects } from '@modules/user-auth/store/auth.effects';
 import {UserAuthGuard} from '@modules/user-auth/user-auth-guard.service';
+import {environment} from '../environments/environment';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {UserAuthModule} from '@modules/user-auth/user-auth.module';
 
 @NgModule({
   declarations: [
@@ -25,8 +28,10 @@ import {UserAuthGuard} from '@modules/user-auth/user-auth-guard.service';
     CoreModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    UserAuthModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ AuthEffects ])
+    EffectsModule.forRoot([ AuthEffects ]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [UserAuthGuard],
   bootstrap: [AppComponent]

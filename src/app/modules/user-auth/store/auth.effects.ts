@@ -1,12 +1,12 @@
-import {Actions, Effect, ofType} from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { map, mergeMap } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment';
+import {Router} from '@angular/router';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map, mergeMap, switchMap} from 'rxjs/operators';
+import {Actions, Effect, ofType} from '@ngrx/effects';
 
 import * as AuthActions from './auth.actions';
 
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Router} from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class AuthEffects {
@@ -23,10 +23,10 @@ export class AuthEffects {
     map((action: AuthActions.TryRegister) => {
       return action.payload;
     }),
-    mergeMap(payload =>
+    switchMap(payload =>
       this.http.post(this.url + 'register', payload).pipe(
         mergeMap((response) => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['shop']);
           return [{type: AuthActions.REGISTER }];
           }
         ),
@@ -35,17 +35,17 @@ export class AuthEffects {
   );
 
   @Effect()
-  authSignin = this.actions$.pipe(
+  authLogin$ = this.actions$.pipe(
     ofType(AuthActions.TRY_LOGIN),
     map((action: AuthActions.TryLogin) => {
       return action.payload;
     }),
-    mergeMap(payload =>
+    switchMap(payload =>
       this.http.get(this.url + 'login', {
         headers: new HttpHeaders().append('Authorization', 'Basic ' + window.btoa(payload.email + ':' + payload.password))
       }).pipe(
         mergeMap((response) => {
-          this.router.navigate(['/shop']);
+          this.router.navigate(['shop']);
           return [
             {
               type: AuthActions.LOGIN,

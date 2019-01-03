@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ProfilePageComponent} from '@modules/user-profile/pages/profile-page/profile-page.component';
-import {UserAuthGuard} from '@modules/user-auth/user-auth-guard.service';
+import {ProfilePageComponent} from '@modules/user/pages/profile-page/profile-page.component';
 
 const routes: Routes = [
-  { path: 'me', component: ProfilePageComponent, canActivate: [UserAuthGuard] }
+  { path: '', redirectTo: 'me', pathMatch: 'full'},
+  { path: 'me', component: ProfilePageComponent },
 ];
 
 @NgModule({
