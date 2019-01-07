@@ -26,7 +26,7 @@ export class AuthEffects {
     switchMap(payload =>
       this.http.post(this.url + 'register', payload).pipe(
         mergeMap((response) => {
-          this.router.navigate(['shop']);
+          this.router.navigate(['register']);
           return [{type: AuthActions.REGISTER }];
           }
         ),

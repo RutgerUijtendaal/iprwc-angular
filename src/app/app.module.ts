@@ -17,6 +17,7 @@ import {UserAuthGuard} from '@modules/user-auth/user-auth-guard.service';
 import {environment} from '../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {UserAuthModule} from '@modules/user-auth/user-auth.module';
+import {CartModule} from '@modules/cart/cart.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {UserAuthModule} from '@modules/user-auth/user-auth.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     UserAuthModule,
+    CartModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([ AuthEffects ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],

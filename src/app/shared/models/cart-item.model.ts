@@ -4,8 +4,7 @@ export class CartItem {
   public product: Product;
   public itemCount: number;
 
-  constructor(product: Product,
-              itemCount: number) {
+  constructor(product: Product, itemCount: number) {
     this.product = product;
     this.itemCount = itemCount;
   }

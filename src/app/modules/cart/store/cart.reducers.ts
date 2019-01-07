@@ -1,6 +1,7 @@
 import {CartItem} from '@shared/models/cart-item.model';
+import {AppState} from '@core/store/app.reducer';
 
-export interface CartState {
+export interface CartState extends AppState {
   cart: State;
 }
 

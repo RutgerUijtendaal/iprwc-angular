@@ -6,6 +6,9 @@
         <span>Shop</span>
       </button>
       <span class="spacer"></span>
+      <button mat-button class="nav-button "*ngIf="(authState | async).authenticated" routerLink="/cart">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>account_circle</mat-icon>
       </button>
