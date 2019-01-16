@@ -1,0 +1,30 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row fxLayoutGap="10px">
+    <span>
+      Shop
+    </span>
+    <span class="spacer"></span>
+    <mat-icon
+      style="margin-right: 5px">
+      filter_list
+    </mat-icon>
+    <div>
+      <button
+        (click)="resetFilter()"
+        mat-stroked-button
+        color="white">
+        All
+      </button>
+    </div>
+    <div
+      *ngFor="let productTypeEl of (shopState | async).productTypes">
+      <button
+        (click)="filterShop(productTypeEl.productTypeId)"
+        mat-stroked-button
+        color="white">
+        {{ productTypeEl.name }}
+      </button>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>
