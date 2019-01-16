@@ -14,6 +14,7 @@ export class ShopPageComponent implements OnInit {
   constructor(private store: Store<fromShop.ShopState>) { }
 
   ngOnInit() {
+    this.store.dispatch(new ShopActions.TryFetchProductTypes());
     this.store.dispatch(new ShopActions.TryFetchProducts());
   }
 

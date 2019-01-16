@@ -6,11 +6,13 @@ import { UserCredentialsComponent } from './forms/user-credentials/user-credenti
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {CentsCurrencyPipe} from '@shared/pipes/cents-currency.pipe';
 
 @NgModule({
   declarations: [
     DropdownDirective,
     UserCredentialsComponent,
+    CentsCurrencyPipe
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    CentsCurrencyPipe
   ]
 })
 export class SharedModule { }

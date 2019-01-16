@@ -3,6 +3,7 @@ import {Product} from '@shared/models/product.model';
 import {CartItem} from '@shared/models/cart-item.model';
 import {CartItemResponse} from '@shared/models/cart-item-response.model';
 
+export const CLEAR_ITEMS = 'CLEAR ITEMS';
 export const TRY_FETCH_ITEMS = 'TRY_FETCH_ITEMS';
 export const TRY_SET_ITEM = 'TRY_SET_ITEM';
 export const SET_ITEM = 'SET_ITEM';
@@ -12,6 +13,10 @@ export const TRY_REMOVE_ITEM = 'TRY_REMOVE_ITEM';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const TRY_UPDATE_ITEM = 'TRY_UPDATE_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
+
+export class ClearItems implements Action {
+  readonly type = CLEAR_ITEMS;
+}
 
 export class TryFetchItems implements Action {
   readonly type = TRY_FETCH_ITEMS;
@@ -50,7 +55,7 @@ export class TryRemoveItem implements Action {
 export class RemoveItem implements Action {
   readonly type = REMOVE_ITEM;
 
-  constructor(public payload: CartItem) {}
+  constructor(public payload: number) {}
 }
 
 export class TryUpdateItem implements Action {
@@ -65,4 +70,4 @@ export class UpdateItem implements Action {
   constructor(public payload: CartItem) {}
 }
 
-export type CartActions = TryFetchItems | TrySetItem | SetItem | TryAddItem | AddItem | TryRemoveItem | RemoveItem | TryUpdateItem | UpdateItem;
+export type CartActions = ClearItems | TryFetchItems | TrySetItem | SetItem | TryAddItem | AddItem | TryRemoveItem | RemoveItem | TryUpdateItem | UpdateItem;

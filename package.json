@@ -12,11 +12,11 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^7.1.4",
-    "@angular/cdk": "^7.2.0",
+    "@angular/cdk": "github:angular/cdk-builds",
     "@angular/common": "^7.1.4",
     "@angular/compiler": "^7.1.4",
     "@angular/core": "^7.1.4",
-    "@angular/flex-layout": "^7.0.0-beta.22",
+    "@angular/flex-layout": "github:angular/flex-layout-builds",
     "@angular/forms": "^7.1.4",
     "@angular/material": "^7.2.0",
     "@angular/platform-browser": "^7.1.4",
@@ -31,7 +31,7 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.11.4",
+    "@angular-devkit/build-angular": "^0.12.1",
     "@angular/cli": "^7.1.4",
     "@angular/compiler-cli": "^7.1.4",
     "@angular/language-service": "^7.1.4",

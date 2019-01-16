@@ -9,12 +9,14 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import {EffectsModule} from '@ngrx/effects';
 import {ShopEffects} from '@modules/shop/store/shop.effects';
 import { ProductCardDeckComponent } from './components/product-card-deck/product-card-deck.component';
+import { ShopHeaderComponent } from './components/shop-header/shop-header.component';
 
 @NgModule({
   declarations: [
     ShopPageComponent,
     ProductCardComponent,
-    ProductCardDeckComponent
+    ProductCardDeckComponent,
+    ShopHeaderComponent
   ],
   imports: [
     CommonModule,

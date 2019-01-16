@@ -1,6 +1,6 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {take, tap} from 'rxjs/operators';
 
 export class LoggingInterceptor implements HttpInterceptor {
 
@@ -8,7 +8,7 @@ export class LoggingInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap(
         event => {
-          console.log('Logging Interceptor', event);
+          // console.log('Logging Interceptor', event);
         }
       )
     );

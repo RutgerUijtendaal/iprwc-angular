@@ -12,12 +12,12 @@ export class UserAuthInterceptor implements HttpInterceptor {
   constructor(private store: Store<fromApp.AppState>) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Intercepting Auth HTTP');
     return this.store.select('auth').pipe(
       take(1),
       switchMap(
         (authState: fromAuth.State) => {
           if (authState.authenticated) {
+            console.log('Intercepting Auth HTTP');
             const copiedReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + authState.token)});
             return next.handle(copiedReq);
           } else {

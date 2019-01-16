@@ -3,8 +3,8 @@
 
 @include mat-core()
 
-$primaryPalette: mat-palette($mat-blue, 800);
-$accentPalette:  mat-palette($mat-amber, A700);
+$primaryPalette: mat-palette($mat-green, 800);
+$accentPalette:  mat-palette($mat-teal, 500);
 
 // the default warn palette is red, so use that if the theme doesn't define one
 $warnPalette:    mat-palette($mat-red);

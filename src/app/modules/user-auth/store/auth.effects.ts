@@ -3,8 +3,11 @@ import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map, mergeMap, switchMap} from 'rxjs/operators';
 import {Actions, Effect, ofType} from '@ngrx/effects';
+import {Store} from '@ngrx/store';
 
+import * as fromApp from '@core/store/app.reducer';
 import * as AuthActions from './auth.actions';
+import * as CartActions from '@modules/cart/store/cart.actions';
 
 import { environment } from '../../../../environments/environment';
 
@@ -13,9 +16,12 @@ export class AuthEffects {
 
   private url: string;
 
-  constructor(private http: HttpClient, private actions$: Actions, private router: Router) {
+  constructor(private http: HttpClient,
+              private actions$: Actions,
+              private router: Router,
+              private store: Store<fromApp.AppState>) {
     this.url = environment.server;
-}
+  }
 
   @Effect()
   authRegister$ = this.actions$.pipe(
@@ -34,7 +40,7 @@ export class AuthEffects {
     )
   );
 
-  @Effect()
+  @Effect({ dispatch: false })
   authLogin$ = this.actions$.pipe(
     ofType(AuthActions.TRY_LOGIN),
     map((action: AuthActions.TryLogin) => {
@@ -44,17 +50,11 @@ export class AuthEffects {
       this.http.get(this.url + 'login', {
         headers: new HttpHeaders().append('Authorization', 'Basic ' + window.btoa(payload.email + ':' + payload.password))
       }).pipe(
-        mergeMap((response) => {
+        map((response) => {
           this.router.navigate(['shop']);
-          return [
-            {
-              type: AuthActions.LOGIN,
-            },
-            {
-              type: AuthActions.SET_TOKEN,
-              payload: response['token']
-            }
-          ];
+          this.store.dispatch(new AuthActions.Login());
+          this.store.dispatch(new AuthActions.SetToken(response['token']));
+          this.store.dispatch(new CartActions.TryFetchItems());
         })
       )
     ),

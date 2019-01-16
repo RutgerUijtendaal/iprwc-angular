@@ -10,12 +10,14 @@ import {StoreModule} from '@ngrx/store';
 import {cartReducer} from '@modules/cart/store/cart.reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {CartEffects} from '@modules/cart/store/cart.effects';
+import { CartHeaderComponent } from './components/cart-header/cart-header.component';
 
 @NgModule({
   declarations: [
     CartPageComponent,
     CartItemComponent,
-    CartItemDeckComponent
+    CartItemDeckComponent,
+    CartHeaderComponent
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Store} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {map, switchMap} from 'rxjs/operators';
+import {map, mergeMap, switchMap} from 'rxjs/operators';
 
 import {environment} from '../../../../environments/environment';
 
@@ -29,8 +29,10 @@ export class CartEffects {
     switchMap((action: CartActions.TryFetchItems) =>
       this.http.get<CartItemResponse[]>(this.url + 'cart').pipe(
         map((cartItemsResponse) => {
+          console.log('TryFetchItems fired');
+          console.log(cartItemsResponse);
+          this.store.dispatch(new CartActions.ClearItems());
           cartItemsResponse.forEach((cartItemResponse) => {
-            console.log(cartItemResponse);
             this.store.dispatch(new CartActions.TrySetItem(cartItemResponse));
           });
         })
@@ -45,14 +47,14 @@ export class CartEffects {
     map((action: CartActions.TrySetItem) => {
       return action.payload;
     }),
-    switchMap(payload =>
+    mergeMap(payload =>
       this.http.get<Product>(this.url + 'product/' + payload.productId).pipe(
         map((product: Product) => {
-          console.log(product);
           const cartItem: CartItem = new CartItem(
             product,
             payload.itemCount
           );
+          console.log('TryFetchItem fired');
           console.log(cartItem);
           return {type: CartActions.SET_ITEM, payload: cartItem};
         })
@@ -69,10 +71,52 @@ export class CartEffects {
     switchMap((product: Product) =>
       this.http.put(this.url + 'cart', product).pipe(
         map((cartItem) => {
+          console.log('TryAddItem fired');
           console.log(cartItem);
-          return {type: CartActions.ADD_ITEM, payload: cartItem};
+          return {type: CartActions.TRY_FETCH_ITEMS, payload: cartItem};
         })
       )
     )
   );
+
+  @Effect()
+  updateItem$ = this.actions$.pipe(
+    ofType(CartActions.TRY_UPDATE_ITEM),
+    map((action: CartActions.TryUpdateItem) => {
+      return action.payload;
+    }),
+    map((cartItem: CartItem) => {
+      const message: CartItemResponse = new CartItemResponse(
+        cartItem.product.productId,
+        cartItem.itemCount
+      );
+      return message;
+    }),
+    switchMap((message: CartItemResponse) =>
+      this.http.post(this.url + 'cart', message).pipe(
+        map((cartItem) => {
+          console.log('TryUpdateItem fired');
+          console.log(cartItem);
+          return {type: CartActions.UPDATE_ITEM, payload: cartItem}
+        })
+      )
+    )
+  );
+
+  @Effect()
+  removeItem$ = this.actions$.pipe(
+    ofType(CartActions.TRY_REMOVE_ITEM),
+    map((action: CartActions.TryRemoveItem) => {
+      return action.payload.product.productId.toString()
+    }),
+    switchMap((productId: string) =>
+      this.http.delete(this.url + 'cart/' +  productId).pipe(
+        map(() => {
+          console.log('TryRemoveItem fired');
+          console.log(productId);
+          return {type: CartActions.REMOVE_ITEM, payload: +productId}
+        })
+      )
+    )
+  )
 }
