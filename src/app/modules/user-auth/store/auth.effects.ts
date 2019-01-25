@@ -55,7 +55,7 @@ export class AuthEffects {
             map((response) => {
               console.log(response);
               this.router.navigate(['login']);
-              return [{type: AuthActions.REGISTER}];
+              return {type: AuthActions.REGISTER};
             })
           )
         )
