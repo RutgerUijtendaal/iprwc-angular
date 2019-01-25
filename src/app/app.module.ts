@@ -18,6 +18,7 @@ import {environment} from '../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {UserAuthModule} from '@modules/user-auth/user-auth.module';
 import {CartModule} from '@modules/cart/cart.module';
+import {UserModule} from '@modules/user/user.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {CartModule} from '@modules/cart/cart.module';
     AppRoutingModule,
     UserAuthModule,
     CartModule,
+    UserModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([ AuthEffects ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],

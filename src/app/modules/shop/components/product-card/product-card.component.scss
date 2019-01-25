@@ -1,0 +1,13 @@
+.myFlexedImage {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 280px
+}
+
+:host {
+  margin-bottom: 20px;
+  max-width: 250px;
+  min-width: 250px;
+  min-height: 500px;
+}

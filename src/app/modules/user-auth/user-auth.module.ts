@@ -7,13 +7,15 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginCardComponent } from './components/login-card/login-card.component';
 import {SharedModule} from '@shared/shared.module';
 import { RegisterCardComponent } from './components/register-card/register-card.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 @NgModule({
   declarations: [
     RegisterPageComponent,
     LoginPageComponent,
     LoginCardComponent,
-    RegisterCardComponent
+    RegisterCardComponent,
+    RegisterFormComponent
   ],
   imports: [
     CommonModule,

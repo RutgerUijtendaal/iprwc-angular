@@ -1,3 +1,10 @@
-<!--<div class="content">-->
-  <app-register-card></app-register-card>
-<!--</div>-->
+<app-subheader
+  [headerText]="'Register'">
+</app-subheader>
+
+<div flexLayout="column" fxLayoutAlign="center center">
+  <app-register-card
+    fxFlex="70%"
+    fxFlex.lt-md="90%"
+  ></app-register-card>
+</div>

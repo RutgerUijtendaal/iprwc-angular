@@ -5,7 +5,7 @@
   <div fxLayout="row"
        fxLayoutAlign="center center"
        fxFlex.gt-sm="10%"
-       fxFlex.lt-md="20%"
+       fxFlex="20%"
        fxHide
        fxShow.gt-sm
   >
@@ -13,7 +13,7 @@
   </div>
   <div fxLayout="row wrap"
        fxFlex.gt-sm="30%"
-       fxFlex.lt-md="49%">
+       fxFlex="49%">
     <h2 fxFlex="100%"
         [ngStyle.lt-md]="{'text-align': 'center'}"
         [ngStyle.gt-sm]="{'text-align': 'start'}">
@@ -29,7 +29,7 @@
     fxLayout="row wrap"
     fxLayoutAlign="center center"
     fxFlex.gt-sm="18%"
-    fxFlex.lt-md="49%"
+    fxFlex="49%"
   >
     <h4>
       &euro; {{ cartItem.product.price * cartItem.itemCount | centsCurrency }}
@@ -38,7 +38,7 @@
   <div fxLayout="row wrap"
        fxLayoutAlign="center center"
        fxFlex.gt-sm="25%"
-       fxFlex.lt-md="49%">
+       fxFlex="49%">
     <button mat-raised-button class="small" (click)="subtractAmount()">
       <mat-icon aria-label="Decrease Product Count">remove</mat-icon>
     </button>
@@ -51,9 +51,9 @@
   </div>
   <div fxLayout="row wrap"
        fxLayoutAlign.gt-sm="end center"
-       fxLayoutAlign.lt-md="center center"
+       fxLayoutAlign="center center"
        fxFlex.gt-sm="10%"
-       fxFlex.lt-md="49%"
+       fxFlex="49%"
   >
     <button mat-raised-button class="small" color="warn" (click)="delete()">
       <mat-icon aria-label="Delete Product">clear</mat-icon>

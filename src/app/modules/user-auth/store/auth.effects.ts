@@ -10,6 +10,7 @@ import * as AuthActions from './auth.actions';
 import * as CartActions from '@modules/cart/store/cart.actions';
 
 import { environment } from '../../../../environments/environment';
+import {User} from '@shared/models/user.model';
 
 @Injectable()
 export class AuthEffects {
@@ -29,13 +30,35 @@ export class AuthEffects {
     map((action: AuthActions.TryRegister) => {
       return action.payload;
     }),
-    switchMap(payload =>
-      this.http.post(this.url + 'register', payload).pipe(
-        mergeMap((response) => {
-          this.router.navigate(['register']);
-          return [{type: AuthActions.REGISTER }];
-          }
-        ),
+    mergeMap(payload =>
+      this.http.post(this.url + 'register/', {
+        email: payload.email,
+        password: payload.password
+      }).pipe(
+        mergeMap((user: User) =>
+          this.http.post(this.url + 'contact/', {
+            userId: user.userId,
+            firstName: payload.firstname,
+            lastName: payload.lastname,
+            country: 'Netherlands',
+            streetName: payload.streetname,
+            houseNumber: payload.housenumber,
+            zipLetters: payload.zipletters,
+            zipNumbers: payload.zipnumbers
+          },
+          {
+            headers: new HttpHeaders().append(
+              'Authorization',
+              'Basic ' + window.btoa(payload.email + ':' + payload.password)
+            )
+          }).pipe(
+            map((response) => {
+              console.log(response);
+              this.router.navigate(['login']);
+              return [{type: AuthActions.REGISTER}];
+            })
+          )
+        )
       )
     )
   );

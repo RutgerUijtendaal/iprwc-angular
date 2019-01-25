@@ -11,10 +11,19 @@
     </app-cart-item>
   </div>
   <div
+    style="margin-top: 20px;"
+    *ngIf="(cartState | async).cart.length > 0">
+    <app-cart-sum>
+    </app-cart-sum>
+  </div>
+  <div
     *ngIf="(cartState | async).cart.length === 0"
     style="text-align: center">
     <h2>
-      Add items from the shop to your shopping cart to see them here.
+      Cart is empty.
     </h2>
+    <h4>
+      Add items from the shop to your shopping cart to see them here.
+    </h4>
   </div>
 </div>

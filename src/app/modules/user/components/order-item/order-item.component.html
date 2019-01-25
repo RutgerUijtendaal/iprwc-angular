@@ -1,0 +1,58 @@
+<mat-card
+  (click)="viewOrder(orderItem.orderId)"
+  style="cursor:pointer;"
+  fxLayout="row wrap"
+  fxLayoutGap="1%">
+  <div
+    fxLayout="row"
+    fxFlex="15%"
+    fxFlex.lt-md="48%"
+    fxFlex.lt-sm="100%">
+    <p class="info-name">
+      Order ID:
+    </p>
+    <p>
+      {{ orderItem.orderId }}
+    </p>
+  </div>
+  <div
+    fxLayout="row"
+    fxFlex="25%"
+    fxFlex.lt-md="48%"
+    fxFlex.lt-sm="100%">
+    <p class="info-name">
+      Order Date:
+    </p>
+    <p>
+      {{ (orderItem.orderDateTime | date ) }}
+    </p>
+  </div>
+  <div
+    fxLayout="row"
+    fxFlex="30%"
+    fxFlex.lt-md="48%"
+    fxFlex.lt-sm="100%">
+    <p class="info-name">
+    Payment Type:
+    </p>
+    <img
+      style="padding-top: 5px;"
+      [src]="(paymentTypes | filter:'paymentTypeId':orderItem.paymentTypeId).imgPath">
+    <p>
+      {{ (paymentTypes | filter:'paymentTypeId':orderItem.paymentTypeId).name }}
+    </p>
+  </div>
+  <div
+    fxLayout="row"
+    fxFlex="25%"
+    fxFlex.lt-md="48%"
+    fxFlex.lt-sm="100%">
+    <p class="info-name">
+      Order Status:
+    </p>
+    <p>
+      {{ (orderStatuses | filter:'orderStatusId':orderItem.orderStatusId).name }}
+    </p>
+  </div>
+
+</mat-card>

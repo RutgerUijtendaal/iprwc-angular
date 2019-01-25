@@ -1,0 +1,46 @@
+<mat-card fxLayout="row wrap"
+          fxLayoutGap="1%"
+          [ngStyle.lt-md]="{'height': '250px'}"
+          [ngStyle.gt-sm]="{'height': '150px'}">
+  <div fxLayout="row"
+       fxLayoutAlign="center center"
+       fxFlex.gt-sm="10%"
+       fxFlex="20%"
+       fxHide
+       fxShow.gt-sm
+  >
+    <img [src]="orderedProduct.product.imagePath" [alt]="orderedProduct.product.name">
+  </div>
+  <div fxLayout="row wrap"
+       fxFlex.gt-sm="30%"
+       fxFlex="49%">
+    <h2 fxFlex="100%"
+        [ngStyle.lt-md]="{'text-align': 'center'}"
+        [ngStyle.gt-sm]="{'text-align': 'start'}">
+      {{ orderedProduct.product.name }}
+    </h2>
+    <p fxFlex="100%"
+       [ngStyle.lt-md]="{'text-align': 'center'}"
+       [ngStyle.gt-sm]="{'text-align': 'start'}">
+      {{ orderedProduct.product.description }}
+    </p>
+  </div>
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="center center"
+    fxFlex.gt-sm="18%"
+    fxFlex="49%"
+  >
+    <h4>
+      Count: {{  orderedProduct.itemCount  }}
+    </h4>
+  </div>
+  <div fxLayout="row wrap"
+       fxLayoutAlign="center center"
+       fxFlex.gt-sm="25%"
+       fxFlex="49%">
+    <h4>
+      Total Price: &euro; {{ orderedProduct.product.price * orderedProduct.itemCount | centsCurrency }}
+    </h4>
+  </div>
+</mat-card>

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Store} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {map, mergeMap, switchMap} from 'rxjs/operators';
@@ -12,13 +12,18 @@ import * as fromCart from './cart.reducers';
 import {Product} from '@shared/models/product.model';
 import {CartItem} from '@shared/models/cart-item.model';
 import {CartItemResponse} from '@shared/models/cart-item-response.model';
+import {Order} from '@shared/models/order.model';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class CartEffects {
 
   private url: string;
 
-  constructor(private http: HttpClient, private actions$: Actions, private store: Store<fromCart.CartState>) {
+  constructor(private http: HttpClient,
+              private actions$: Actions,
+              private router: Router,
+              private store: Store<fromCart.CartState>) {
     this.url = environment.server;
   }
 
@@ -29,8 +34,6 @@ export class CartEffects {
     switchMap((action: CartActions.TryFetchItems) =>
       this.http.get<CartItemResponse[]>(this.url + 'cart').pipe(
         map((cartItemsResponse) => {
-          console.log('TryFetchItems fired');
-          console.log(cartItemsResponse);
           this.store.dispatch(new CartActions.ClearItems());
           cartItemsResponse.forEach((cartItemResponse) => {
             this.store.dispatch(new CartActions.TrySetItem(cartItemResponse));
@@ -54,8 +57,6 @@ export class CartEffects {
             product,
             payload.itemCount
           );
-          console.log('TryFetchItem fired');
-          console.log(cartItem);
           return {type: CartActions.SET_ITEM, payload: cartItem};
         })
       )
@@ -69,10 +70,8 @@ export class CartEffects {
       return action.payload;
     }),
     switchMap((product: Product) =>
-      this.http.put(this.url + 'cart', product).pipe(
+      this.http.put(this.url + 'cart/', product).pipe(
         map((cartItem) => {
-          console.log('TryAddItem fired');
-          console.log(cartItem);
           return {type: CartActions.TRY_FETCH_ITEMS, payload: cartItem};
         })
       )
@@ -93,10 +92,8 @@ export class CartEffects {
       return message;
     }),
     switchMap((message: CartItemResponse) =>
-      this.http.post(this.url + 'cart', message).pipe(
+      this.http.post(this.url + 'cart/', message).pipe(
         map((cartItem) => {
-          console.log('TryUpdateItem fired');
-          console.log(cartItem);
           return {type: CartActions.UPDATE_ITEM, payload: cartItem}
         })
       )
@@ -112,11 +109,26 @@ export class CartEffects {
     switchMap((productId: string) =>
       this.http.delete(this.url + 'cart/' +  productId).pipe(
         map(() => {
-          console.log('TryRemoveItem fired');
-          console.log(productId);
           return {type: CartActions.REMOVE_ITEM, payload: +productId}
         })
       )
     )
-  )
+  );
+
+  @Effect({ dispatch: false})
+  createOrder$ = this.actions$.pipe(
+    ofType(CartActions.TRY_CREATE_ORDER),
+    map((action: CartActions.TryCreateOrder) => {
+      return action.payload;
+    }),
+    switchMap( (paymentTypeId: number) =>
+      this.http.put<Order>(this.url + 'order/', {paymentTypeId: paymentTypeId}).pipe(
+        map( (order: Order) => {
+          this.store.dispatch(new CartActions.SetOrder(order));
+          this.store.dispatch(new CartActions.TryFetchItems())
+          this.router.navigate(['cart/success']);
+        })
+      )
+    )
+  );
 }

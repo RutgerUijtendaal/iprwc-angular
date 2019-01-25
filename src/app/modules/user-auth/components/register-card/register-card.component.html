@@ -1,16 +1,23 @@
-<mat-card class="card">
-  <mat-card-header class="login-card-header">
-    <mat-card-title>Register</mat-card-title>
-  </mat-card-header>
-  <form action="" (ngSubmit)="register()">
-    <mat-card-content>
-      <app-user-credentials
-        [user]="registerForm"
+<mat-card
+  fxLayout="row wrap">
+  <form
+    fxLayout="row wrap"
+    fxFlex="100%"
+    action=""
+    (ngSubmit)="register()">
+    <mat-card-content
+      fxFlex="100%">
+      <app-register-form
+        fxLayout="row wrap"
+        fxLayoutAlign="center"
+        fxFlex="100%"
+        [registerForm]="registerForm"
       >
-      </app-user-credentials>
+      </app-register-form>
     </mat-card-content>
-    <mat-card-actions>
-      <div class="button-row">
+    <div
+      fxFlex="100%"
+      fxLayoutAlign="center center">
         <button
           mat-raised-button
           [disabled]="!registerForm.valid"
@@ -18,8 +25,7 @@
           color="primary">
           Register
         </button>
-      </div>
-    </mat-card-actions>
+    </div>
   </form>
 </mat-card>
 

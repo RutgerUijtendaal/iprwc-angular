@@ -1,0 +1,22 @@
+<div fxLayout="column" style="margin-top: 35px">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <mat-card class="card" fxFlex.gt-md="50" fxFlex.lt-lg="70" fxFlex.lt-md="90">
+      <h2 style="text-align: center; margin-top: 10px;">
+        Welcome
+      </h2>
+      <img mat-card-image [src]="'https://i.imgur.com/14X7ZtZ.jpg'">
+      <mat-card-content>
+        <h3 style="text-align: center">
+          From our small farm we create local products. Browse the shop or make an account to place your first order!
+        </h3>
+      </mat-card-content>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+          <button mat-flat-button button fxFlex="40" color="primary" (click)="toShop()">Shop</button>
+          <button mat-flat-button fxFlex="40" color="accent" (click)="toRegister()">Register</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

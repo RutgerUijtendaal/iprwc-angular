@@ -2,6 +2,7 @@ import {CartItem} from '@shared/models/cart-item.model';
 import {AppState} from '@core/store/app.reducer';
 
 import * as CartActions from './cart.actions';
+import {Order} from '@shared/models/order.model';
 
 export interface CartState extends AppState {
   cart: State;
@@ -9,10 +10,12 @@ export interface CartState extends AppState {
 
 export interface State {
   cart: CartItem[];
+  order: Order;
 }
 
 const initialState: State = {
-  cart: []
+  cart: [],
+  order: null
 };
 
 export function cartReducer(state = initialState, action) {
@@ -22,31 +25,39 @@ export function cartReducer(state = initialState, action) {
         cart: []
       };
     case (CartActions.SET_ITEM):
-      console.log('SetItem fired');
       return {
+        ...state,
         cart: [...state.cart, action.payload]
       };
     case (CartActions.ADD_ITEM):
-      console.log('AddItem fired');
       return {
+        ...state,
         cart: [...state.cart, action.payload]
       };
     case (CartActions.REMOVE_ITEM):
-      console.log('RemoveItem fired');
-      let index = state.cart.map(item => item.product.productId).indexOf(action.payload);
+      let index = state.cart.map(
+        item => item.product.productId
+      ).indexOf(action.payload);
+
       const oldCart = [...state.cart];
+
       if(index !== -1) {
         oldCart.splice(index, 1);
       }
       return {
+        ...state,
         cart: [...oldCart]
       };
     case (CartActions.UPDATE_ITEM):
-      console.log('UpdateItem fired');
       return {
+        ...state,
         cart: [...state.cart]
       };
-
+    case (CartActions.SET_ORDER):
+      return {
+        ...state,
+        order: action.payload
+      };
     default:
       return state;
   }

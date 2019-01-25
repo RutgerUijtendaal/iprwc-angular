@@ -23,8 +23,6 @@ export class ShopEffects {
     switchMap((action: ShopActions.TryFetchProducts) =>
       this.http.get<Product[]>(this.url + 'product').pipe(
         map((products) => {
-          console.log('TryFetchProducts fired');
-          console.log(products);
           return {type: ShopActions.SET_PRODUCTS, payload: products};
         })
       )
@@ -37,8 +35,6 @@ export class ShopEffects {
     switchMap((action: ShopActions.TryFetchProductTypes) =>
       this.http.get<ProductType[]>(this.url + 'producttype').pipe(
         map((productTypes) => {
-          console.log('TryFetchProductTypes fired');
-          console.log(productTypes);
           return {type: ShopActions.SET_PRODUCT_TYPES, payload: productTypes}
         })
       )

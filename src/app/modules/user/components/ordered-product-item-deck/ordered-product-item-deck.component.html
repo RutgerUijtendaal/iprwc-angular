@@ -1,0 +1,13 @@
+<div fxLayout="column wrap" fxLayoutAlign="center">
+  <div
+    *ngIf="(userState | async).orderedProducts.length > 0"
+    fxLayout="column wrap"
+    fxLayoutAlign="center"
+    fxLayoutGap="20px">
+    <app-ordered-product-item
+      *ngFor="let orderedProductEl of (userState | async).orderedProducts"
+      [fxFlexOrder]="orderedProductEl.product.productId"
+      [orderedProduct]="orderedProductEl">
+    </app-ordered-product-item>
+  </div>
+</div>

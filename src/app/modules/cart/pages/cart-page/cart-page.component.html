@@ -1,9 +1,15 @@
-<app-cart-header>
+<app-subheader
+[headerText]="'Shopping Cart'">
+</app-subheader>
 
-</app-cart-header>
-<div class="flex-container" flexLayout="column" fxLayoutAlign="center">
+<div flexLayout="column" fxLayoutAlign="center">
   <app-cart-item-deck
     fxFlex="70">
   </app-cart-item-deck>
 </div>
 
+<div flexLayout="column" fxLayoutAlign="center">
+  <app-cart-bottom fxFlex="70">
+
+  </app-cart-bottom>
+</div>

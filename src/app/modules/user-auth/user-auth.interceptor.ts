@@ -17,7 +17,6 @@ export class UserAuthInterceptor implements HttpInterceptor {
       switchMap(
         (authState: fromAuth.State) => {
           if (authState.authenticated) {
-            console.log('Intercepting Auth HTTP');
             const copiedReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + authState.token)});
             return next.handle(copiedReq);
           } else {

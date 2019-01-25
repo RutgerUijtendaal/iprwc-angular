@@ -1,0 +1,29 @@
+<div
+  *ngIf="(cartState | async).cart.length > 0"
+  flexLayout="row"
+  fxLayoutAlign="center"
+  style="margin-top: 20px; margin-bottom: 30px">
+  <div
+    fxFlex="100"
+    fxLayoutAlign="end">
+    <mat-form-field
+      style="margin-right: 30px;">
+      <mat-select [(value)]="selected">
+        <mat-option value="0">Payment Type</mat-option>
+        <mat-option
+          *ngFor="let paymentEl of (userState | async).paymentTypes"
+          [value]="paymentEl.paymentTypeId">
+          {{ paymentEl.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      class="order-button"
+      [disabled]="selected === '0'"
+      (click)="placeOrder()">
+      Order
+    </button>
+  </div>
+</div>

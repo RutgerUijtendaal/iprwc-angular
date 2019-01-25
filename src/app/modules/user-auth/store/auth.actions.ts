@@ -10,7 +10,17 @@ export const SET_TOKEN = 'SET_TOKEN';
 export class TryRegister implements Action {
   readonly type = TRY_REGISTER;
 
-  constructor(public payload: {email: string, password: string}) {}
+  constructor(
+    public payload: {
+      email: string,
+      password: string,
+      firstname: string,
+      lastname: string,
+      streetname: string,
+      housenumber: number,
+      zipnumbers: number,
+      zipletters: string
+    }) {}
 }
 
 export class Register implements Action {

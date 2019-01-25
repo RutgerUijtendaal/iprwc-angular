@@ -10,14 +10,18 @@ import {StoreModule} from '@ngrx/store';
 import {cartReducer} from '@modules/cart/store/cart.reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {CartEffects} from '@modules/cart/store/cart.effects';
-import { CartHeaderComponent } from './components/cart-header/cart-header.component';
+import { CartSumComponent } from './components/cart-sum/cart-sum.component';
+import { CartBottomComponent } from './components/cart-bottom/cart-bottom.component';
+import { SuccesPageComponent } from './pages/succes-page/succes-page.component';
 
 @NgModule({
   declarations: [
     CartPageComponent,
     CartItemComponent,
     CartItemDeckComponent,
-    CartHeaderComponent
+    CartSumComponent,
+    CartBottomComponent,
+    SuccesPageComponent
   ],
   imports: [
     CommonModule,

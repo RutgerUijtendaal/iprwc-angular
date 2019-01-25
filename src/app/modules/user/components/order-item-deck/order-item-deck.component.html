@@ -1,0 +1,26 @@
+<div
+  style="margin-top: 20px;"
+  fxLayout="column wrap"
+  fxLayoutAlign="center">
+  <div
+    *ngIf="(userState | async).orders.length > 0"
+    fxLayout="column wrap"
+    fxLayoutAlign="center"
+    fxLayoutGap="20px">
+    <app-order-item
+      *ngFor="let orderEl of (userState | async).orders"
+      [orderItem]="orderEl">
+    </app-order-item>
+  </div>
+
+  <div
+    style="text-align: center"
+    *ngIf="(userState | async).orders.length < 1">
+    <h2>
+      No placed orders.
+    </h2>
+    <h4>
+      Add Products to your cart and order them to see your order here.
+    </h4>
+  </div>
+</div>

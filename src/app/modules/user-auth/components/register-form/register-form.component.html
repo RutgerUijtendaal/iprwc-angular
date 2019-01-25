@@ -1,0 +1,104 @@
+<mat-card-header
+  fxFlex="100%"
+  fxLayoutAlign="center">
+  <mat-card-title>Account Info</mat-card-title>
+</mat-card-header>
+<div
+  style="margin-bottom: 20px"
+  fxFlex="100%">
+  <hr>
+</div>
+<div
+  fxLayout="row wrap"
+  fxFlex="50%"
+  fxFlex.lt-md="100%">
+  <mat-form-field
+  fxFlex="100%">
+    <input type="email" matInput [formControl]="registerForm.controls.email" placeholder="Enter your email">
+    <mat-error *ngIf="registerForm.controls.email.hasError('email') && !registerForm.controls.email.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="registerForm.controls.email.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field
+  fxFlex="100%">
+    <input type="password" matInput [formControl]="registerForm.controls.password" placeholder="Enter your password" [type]="!hide ? 'password' : 'text'">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-error *ngIf="registerForm.controls.password.hasError('minlength') && !registerForm.controls.password.hasError('required')">
+      Password is at least 8 characters.
+    </mat-error>
+    <mat-error *ngIf="registerForm.controls.password.hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+</div>
+<mat-card-header
+  fxFlex="100%"
+  fxLayoutAlign="center">
+  <mat-card-title>Contact Info</mat-card-title>
+</mat-card-header>
+<div
+  style="margin-bottom: 20px"
+  fxFlex="100%">
+  <hr>
+</div>
+<div
+  fxLayout="row wrap"
+  fxFlex="50%"
+  fxFlex.lt-md="100%">
+  <mat-form-field
+    fxFlex="100%">
+    <input type="text" matInput [formControl]="registerForm.controls.firstname" placeholder="First Name">
+    <mat-error *ngIf="registerForm.controls.firstname.hasError('required')">
+      Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field
+    fxFlex="100%">
+    <input type="text" matInput [formControl]="registerForm.controls.lastname" placeholder="Last Name">
+    <mat-error *ngIf="registerForm.controls.lastname.hasError('required')">
+      Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field
+    fxFlex="70%">
+    <input type="text" matInput [formControl]="registerForm.controls.streetname" placeholder="Streetname">
+    <mat-error *ngIf="registerForm.controls.streetname.hasError('required')">
+      Street Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <div
+    fxFlex="5%">
+  </div>
+  <mat-form-field
+    fxFlex="25%">
+    <input type="number" matInput [formControl]="registerForm.controls.housenumber" placeholder="House Nr.">
+    <mat-error *ngIf="registerForm.controls.housenumber.hasError('required')">
+      House Number <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field
+    fxFlex="70%">
+    <input type="text" matInput numbers [formControl]="registerForm.controls.zipnumbers" placeholder="Zip Numbers">
+    <mat-error *ngIf="registerForm.controls.zipnumbers.hasError('required')">
+      Zip Code is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <div
+  fxFlex="5%">
+  </div>
+  <mat-form-field
+    fxFlex="25%">
+    <input type="text" matInput letters uppercase [formControl]="registerForm.controls.zipletters" placeholder="Zip Letters">
+    <mat-error *ngIf="registerForm.controls.zipletters.hasError('required')">
+      Zip Code is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+</div>
